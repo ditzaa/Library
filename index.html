@@ -7,6 +7,42 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+    <div id="main-div">
+        <!-- <div id="button-divs"> -->
+           <button id="new-book-button">NEW BOOK</button> 
+        <!-- </div> -->
+        
+      <table id="libraryTable">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Pages</th>
+            <th>Read</th>
+        </tr>
+    </table>  
+
+    <dialog id="new-book-dialog">
+        <div class="input-row">
+            <label>Title: </label>
+            <input class="new-book-input"></input>
+        </div>
+        <div class="input-row">
+            <label>Author: </label>
+            <input class="new-book-input"></input>
+        </div>
+        <div class="input-row">
+            <label>Pages: </label>
+            <input class="new-book-input"></input>
+        </div>
+        <div class="input-row">
+            <label>Read: </label>
+            <input class="new-book-input"></input>
+        </div>
+        
+        <button id="dialog-cancel">Cancel</button>
+        <button id="dialog-add-book">Add book</button>
+    </dialog>
+    </div>
     
 </body>
 <script src="./index.js"></script>
