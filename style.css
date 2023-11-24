@@ -12,6 +12,7 @@ table {
 td, th {
     border: 1px solid black;
     padding: 10px 20px;
+    text-align: center;
 }
 
 #new-book-button{
@@ -27,7 +28,6 @@ td, th {
 
 .new-book-input{
     border: 1px solid black;
-    /* height: 10px; */
     width: 200px;
     margin-left: 10px;
 }
@@ -44,3 +44,4 @@ td, th {
 label{
     width: 60px;
 }
+

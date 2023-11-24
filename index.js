@@ -53,10 +53,82 @@ displayLibrary();
 
 const dialog = document.getElementById('new-book-dialog');
 const newBookButton = document.getElementById('new-book-button');
+const cancelButton = document.getElementById('dialog-cancel');
+const btnAddBook = document.getElementById('dialog-add-book');
 
 newBookButton.addEventListener('click', () =>{
     dialog.showModal();
 })
+
+cancelButton.addEventListener('click', ()=>{
+    dialog.close();
+})
+
+btnAddBook.addEventListener('click', ()=>{
+    const newRow = document.createElement('tr');
+    //libraryTable.appendChild(newRow);
+    let validatedData = 1;
+
+    const dataTitle = document.createElement('td');
+    const inputTitle = document.getElementById('input-title');
+    if(inputTitle.value.length < 100 && inputTitle.value.length > 1){
+        dataTitle.textContent = inputTitle.value;
+        //newRow.appendChild(dataTitle);
+    }else{
+        validatedData = 0;
+        alert("The name of the book must have between 1 and 100 characters!")
+    }
+    
+
+    const dataAuthor = document.createElement('td');
+    const inputAuthor = document.getElementById('input-author');
+    if(inputAuthor.value.length < 50 && inputAuthor.value.length > 0){
+        dataAuthor.textContent = inputAuthor.value;
+        // newRow.appendChild(dataAuthor);  
+    }else{
+        validatedData = 0;
+        alert("The name of the author must have between 1-50 characters!")
+    }
+
+    const dataPages = document.createElement('td');
+    const inputPages = document.getElementById('input-pages');
+    if(inputPages.value < 1){
+        validatedData = 0;
+        alert("Number of pages must be positive!")
+    }else{
+        dataPages.textContent = inputPages.value;
+        // newRow.appendChild(dataPages); 
+    }
+    
+
+    const dataRead = document.createElement('td');
+    const optionSelected = document.getElementById('select-is-read')
+    dataRead.textContent = optionSelected.value;
+    // newRow.appendChild(dataRead);
+
+    if(validatedData == 1){ 
+        newRow.appendChild(dataTitle);
+        newRow.appendChild(dataAuthor);
+        newRow.appendChild(dataPages); 
+        newRow.appendChild(dataRead);
+        libraryTable.appendChild(newRow);
+
+        addBookToLibrary(inputTitle.value, inputAuthor.value, 
+            inputPages.value, optionSelected.value);
+
+        inputTitle.value = '';
+        inputAuthor.value = '';
+        inputPages.value = '';
+        dialog.close();
+        
+        //micut test
+        for(book of myLibrary){
+            console.log(book.title);
+        }
+        
+    }
+})
+
 
 
 
