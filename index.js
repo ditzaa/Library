@@ -5,7 +5,7 @@ const dialogNewBook = document.getElementById('dialog-new-book');
 const newBookButton = document.getElementById('new-book-button');
 const cancelButton = document.getElementById('dialog-cancel');
 const btnAddBook = document.getElementById('dialog-add-book');
-let bookIndex = 0;
+//let bookIndex = 0;
 let deletedElements = 0;
 let indexNode = 0;
 
@@ -28,6 +28,14 @@ function Book(title, author, pages, read){
     this.info = function(){
         return ("" + this.title + " by " + this.author + ", " + this.pages.toString()
          + " pages , " + this.read );
+    }
+
+    Book.prototype.changeReadStatus =function(){
+        if(this.read == 'read'){
+            this.read = 'not read yet';
+        }else{
+            this.read = 'read';
+        }
     }
 }
 
@@ -58,7 +66,7 @@ function displayLibrary() {
 
     for(let book of myLibrary){
         const newRow = document.createElement('tr');
-        newRow.id = "row" + bookIndex.toString();
+        //newRow.id = "row" + bookIndex.toString();
 
         const dataTitle = document.createElement('td');
         dataTitle.textContent = book.title;
@@ -79,8 +87,6 @@ function displayLibrary() {
         const btnDeleteBook = document.createElement('button');
         btnDeleteBook.textContent = "Delete";
         btnDeleteBook.classList.add('button-delete-book');
-        //let bookIndex1 = bookIndex;
-        //btnDeleteBook.id = bookIndex.toString();
 
         btnDeleteBook.addEventListener('click', ()=>{
             countRows();
@@ -90,11 +96,22 @@ function displayLibrary() {
             libraryTable.removeChild(row);
     
             console.log(indexToDelete);
-            console.log(myLibrary);
+            //console.log(myLibrary);
 
         });
-        bookIndex++;
+        //bookIndex++;
 
+        const btnEdit = document.createElement('button');
+        btnEdit.textContent = "Edit Status";
+        btnEdit.classList.add('button-edit-book');
+        btnEdit.addEventListener('click', ()=>{
+            book.changeReadStatus();
+            const row = btnDeleteBook.parentElement;
+            dataRead.textContent = book.read;
+            console.log(book.title, book.read);
+        });
+
+        newRow.appendChild(btnEdit);
         newRow.appendChild(btnDeleteBook);
         libraryTable.appendChild(newRow);
         countRows();
@@ -119,7 +136,7 @@ function createTable(){
     rowHeader.appendChild(headerPages);
 
     const headerRead = document.createElement('th');
-    headerRead.textContent = 'Read';
+    headerRead.textContent = 'Read Status';
     rowHeader.appendChild(headerRead);
 
     tableLibrary.appendChild(rowHeader);
