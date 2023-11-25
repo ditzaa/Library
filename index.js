@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 const mainDiv = document.getElementById('main-div');
 const btnNewBook = document.getElementById('new-book-button');
 const dialogNewBook = document.getElementById('dialog-new-book');
@@ -6,11 +6,18 @@ const newBookButton = document.getElementById('new-book-button');
 const cancelButton = document.getElementById('dialog-cancel');
 const btnAddBook = document.getElementById('dialog-add-book');
 let bookIndex = 0;
+let deletedElements = 0;
+let indexNode = 0;
 
 //hard-coded books
-// addBookToLibrary("The Hobbit", "J.R.R Tolkien", 295, "not read yet");
-// addBookToLibrary("Apple", "P. George", 50, "read");
-// addBookToLibrary("Pineapple", "P. John", 267, "read");
+addBookToLibrary("Hungary", "Budapest", 295, "not read yet");
+addBookToLibrary("Bulgaria", "Sofia", 50, "read");
+addBookToLibrary("Spain", "Madrid", 267, "read");
+addBookToLibrary("Portugal", "Lisbon", 267, "read");
+addBookToLibrary("Moldova", "Lala", 267, "read");
+addBookToLibrary("Romania", "Bucharest", 267, "read");
+addBookToLibrary("China", "Beijing", 267, "read");
+displayLibrary();
 
 function Book(title, author, pages, read){
     this.title = title;
@@ -29,6 +36,15 @@ function addBookToLibrary(title, author, pages, read){
     myLibrary.push(newBook);
 
     return newBook;
+}
+
+function countRows(){
+    const rowNodes = document.querySelectorAll('.button-delete-book');
+    indexNode = 0;
+    for(let node of rowNodes){
+        node.id = indexNode;
+        indexNode++;
+    }
 }
 
 function displayLibrary() {
@@ -60,10 +76,29 @@ function displayLibrary() {
         dataRead.textContent = book.read;
         newRow.appendChild(dataRead);
 
-        libraryTable.appendChild(newRow);
-    }
+        const btnDeleteBook = document.createElement('button');
+        btnDeleteBook.textContent = "Delete";
+        btnDeleteBook.classList.add('button-delete-book');
+        //let bookIndex1 = bookIndex;
+        //btnDeleteBook.id = bookIndex.toString();
 
-    //mainDiv.appendChild(tableLibrary);
+        btnDeleteBook.addEventListener('click', ()=>{
+            countRows();
+            const row = btnDeleteBook.parentElement;
+            const indexToDelete = btnDeleteBook.id;
+            myLibrary.splice(btnDeleteBook.id, 1);
+            libraryTable.removeChild(row);
+    
+            console.log(indexToDelete);
+            console.log(myLibrary);
+
+        });
+        bookIndex++;
+
+        newRow.appendChild(btnDeleteBook);
+        libraryTable.appendChild(newRow);
+        countRows();
+    }
 }
 
 function createTable(){
@@ -136,6 +171,15 @@ btnAddBook.addEventListener('click', ()=>{
     if(validatedData == 1){
         addBookToLibrary(title, author, pages, option);
         displayLibrary();
+
+        inputTitle.value = '';
+        inputAuthor.value = '';
+        inputPages.value = '';
+        //deletedElements--;
+        const rowNodes = document.querySelectorAll('.button-delete-book');
+        
+        countRows();
+
         dialogNewBook.close();
     }
 })
