@@ -1,4 +1,16 @@
 const myLibrary = [];
+const mainDiv = document.getElementById('main-div');
+const btnNewBook = document.getElementById('new-book-button');
+const dialogNewBook = document.getElementById('dialog-new-book');
+const newBookButton = document.getElementById('new-book-button');
+const cancelButton = document.getElementById('dialog-cancel');
+const btnAddBook = document.getElementById('dialog-add-book');
+let bookIndex = 0;
+
+//hard-coded books
+// addBookToLibrary("The Hobbit", "J.R.R Tolkien", 295, "not read yet");
+// addBookToLibrary("Apple", "P. George", 50, "read");
+// addBookToLibrary("Pineapple", "P. John", 267, "read");
 
 function Book(title, author, pages, read){
     this.title = title;
@@ -19,22 +31,23 @@ function addBookToLibrary(title, author, pages, read){
     return newBook;
 }
 
-//hard-coded books
-addBookToLibrary("The Hobbit", "J.R.R Tolkien", 295, "not read yet");
-addBookToLibrary("Praslea", "P. Ispirescu", 50, "read");
-addBookToLibrary("Ibrahimovich", "P. Mattew", 267, "read");
+function displayLibrary() {
+    const tableToRemove = document.getElementById('table-library');
+    if(tableToRemove != null)
+        tableToRemove.remove();
 
-const libraryTable = document.getElementById('libraryTable');
+    createTable();
 
-function displayLibrary(){
+    const libraryTable = document.getElementById('table-library');
+
     for(let book of myLibrary){
         const newRow = document.createElement('tr');
-        libraryTable.appendChild(newRow);
-    
+        newRow.id = "row" + bookIndex.toString();
+
         const dataTitle = document.createElement('td');
         dataTitle.textContent = book.title;
         newRow.appendChild(dataTitle);
-    
+
         const dataAuthor = document.createElement('td');
         dataAuthor.textContent = book.author;
         newRow.appendChild(dataAuthor);
@@ -46,86 +59,84 @@ function displayLibrary(){
         const dataRead = document.createElement('td');
         dataRead.textContent = book.read;
         newRow.appendChild(dataRead);
+
+        libraryTable.appendChild(newRow);
     }
+
+    //mainDiv.appendChild(tableLibrary);
 }
 
-displayLibrary();
+function createTable(){
+    const tableLibrary = document.createElement('table');
+    tableLibrary.id = 'table-library'
+    const rowHeader = document.createElement('tr');
 
-const dialog = document.getElementById('new-book-dialog');
-const newBookButton = document.getElementById('new-book-button');
-const cancelButton = document.getElementById('dialog-cancel');
-const btnAddBook = document.getElementById('dialog-add-book');
+    const headerTitle = document.createElement('th');
+    headerTitle.textContent = 'Title';
+    rowHeader.appendChild(headerTitle);
 
-newBookButton.addEventListener('click', () =>{
-    dialog.showModal();
+    const headerAuthor = document.createElement('th');
+    headerAuthor.textContent = 'Author';
+    rowHeader.appendChild(headerAuthor);
+
+    const headerPages = document.createElement('th');
+    headerPages.textContent = 'Pages';
+    rowHeader.appendChild(headerPages);
+
+    const headerRead = document.createElement('th');
+    headerRead.textContent = 'Read';
+    rowHeader.appendChild(headerRead);
+
+    tableLibrary.appendChild(rowHeader);
+    mainDiv.appendChild(tableLibrary);
+}
+
+btnNewBook.addEventListener('click', ()=>{
+    dialogNewBook.showModal();
 })
 
 cancelButton.addEventListener('click', ()=>{
-    dialog.close();
+    dialogNewBook.close();
 })
 
 btnAddBook.addEventListener('click', ()=>{
-    const newRow = document.createElement('tr');
-    //libraryTable.appendChild(newRow);
     let validatedData = 1;
+    let title;
+    let author;
+    let pages;
+    let option;
 
-    const dataTitle = document.createElement('td');
     const inputTitle = document.getElementById('input-title');
     if(inputTitle.value.length < 100 && inputTitle.value.length > 1){
-        dataTitle.textContent = inputTitle.value;
-        //newRow.appendChild(dataTitle);
+        title = inputTitle.value;
     }else{
         validatedData = 0;
         alert("The name of the book must have between 1 and 100 characters!")
     }
-    
 
-    const dataAuthor = document.createElement('td');
     const inputAuthor = document.getElementById('input-author');
     if(inputAuthor.value.length < 50 && inputAuthor.value.length > 0){
-        dataAuthor.textContent = inputAuthor.value;
-        // newRow.appendChild(dataAuthor);  
+        author = inputAuthor.value;
     }else{
         validatedData = 0;
         alert("The name of the author must have between 1-50 characters!")
     }
 
-    const dataPages = document.createElement('td');
     const inputPages = document.getElementById('input-pages');
     if(inputPages.value < 1){
         validatedData = 0;
         alert("Number of pages must be positive!")
     }else{
-        dataPages.textContent = inputPages.value;
-        // newRow.appendChild(dataPages); 
+        pages = inputPages.value; 
     }
-    
 
-    const dataRead = document.createElement('td');
     const optionSelected = document.getElementById('select-is-read')
-    dataRead.textContent = optionSelected.value;
-    // newRow.appendChild(dataRead);
+    option = optionSelected.value;
 
-    if(validatedData == 1){ 
-        newRow.appendChild(dataTitle);
-        newRow.appendChild(dataAuthor);
-        newRow.appendChild(dataPages); 
-        newRow.appendChild(dataRead);
-        libraryTable.appendChild(newRow);
-
-        addBookToLibrary(inputTitle.value, inputAuthor.value, 
-            inputPages.value, optionSelected.value);
-
-        inputTitle.value = '';
-        inputAuthor.value = '';
-        inputPages.value = '';
-        dialog.close();
-        
-        //micut test
-        for(book of myLibrary){
-            console.log(book.title);
-        }
-        
+    if(validatedData == 1){
+        addBookToLibrary(title, author, pages, option);
+        displayLibrary();
+        dialogNewBook.close();
     }
 })
 
