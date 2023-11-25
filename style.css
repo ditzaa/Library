@@ -1,3 +1,7 @@
+body{
+    background-color: #F9F6EE;
+}
+
 #main-div{
     display: flex;
     flex-direction: column;
@@ -6,35 +10,66 @@
 }
 
 #new-book-button{
-    margin: 5px;
+    margin: 15px;
+    background-color: #0066b2;
+    color: #FCF5E5;
+    width: 100px;
+    height: 40px;
+    border-radius: 3rem;
+    font-weight: bold;
+    border-style: none;
+    border-color:  #0066b2;
 }
 
 table {
     border-collapse: collapse;
+    width: 50rem;
+    /* border: 1px solid black; */
 }
+
 
 td, th {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     padding: 10px 20px;
     text-align: center;
+    word-wrap: break-word;
+    max-width: 10rem;
+    
 }
 
-.button-delete-book{
-    margin: 0 10px;
+.table-header{
+    background-color: #0066b2;
+    color: #FCF5E5;
+    
 }
 
-.button-edit-book{
-    margin-left: 10px;
+td{
+    background-color: white;
+}
+
+.button-edit-book, .button-delete-book{
+    margin: 10px;
+    background-color: #0066b2;
+    color: #FCF5E5;
+    width: 100px;
+    height: 30px;
+    border-radius: 3rem;
+    font-weight: bold;
+    border-style: none;
+    border-color:  #0066b2;
 }
 
 /* dialog-window*/
 #dialog-new-book{
     width: 300px;
     height: 300px;
+    background-color: #0066b2;
+    color: white;
+    font-weight: bold;
 }
 
 .new-book-input{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 200px;
     margin-left: 10px;
 }

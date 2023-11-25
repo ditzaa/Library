@@ -122,6 +122,7 @@ function createTable(){
     const tableLibrary = document.createElement('table');
     tableLibrary.id = 'table-library'
     const rowHeader = document.createElement('tr');
+    rowHeader.classList.add('table-header');
 
     const headerTitle = document.createElement('th');
     headerTitle.textContent = 'Title';
