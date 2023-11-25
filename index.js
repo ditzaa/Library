@@ -10,14 +10,14 @@ let deletedElements = 0;
 let indexNode = 0;
 
 //hard-coded books
-addBookToLibrary("Hungary", "Budapest", 295, "not read yet");
-addBookToLibrary("Bulgaria", "Sofia", 50, "read");
-addBookToLibrary("Spain", "Madrid", 267, "read");
-addBookToLibrary("Portugal", "Lisbon", 267, "read");
-addBookToLibrary("Moldova", "Lala", 267, "read");
-addBookToLibrary("Romania", "Bucharest", 267, "read");
-addBookToLibrary("China", "Beijing", 267, "read");
-displayLibrary();
+// addBookToLibrary("Hungary", "Budapest", 295, "not read yet");
+// addBookToLibrary("Bulgaria", "Sofia", 50, "read");
+// addBookToLibrary("Spain", "Madrid", 267, "read");
+// addBookToLibrary("Portugal", "Lisbon", 267, "read");
+// addBookToLibrary("Moldova", "Lala", 267, "read");
+// addBookToLibrary("Romania", "Bucharest", 267, "read");
+// addBookToLibrary("China", "Beijing", 267, "read");
+// displayLibrary();
 
 function Book(title, author, pages, read){
     this.title = title;
