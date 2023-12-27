@@ -9,6 +9,12 @@ body{
     justify-content: center;
 }
 
+h1{
+    color:#0066b2;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 #new-book-button{
     margin: 15px;
     background-color: #0066b2;
